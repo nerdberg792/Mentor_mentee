@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Mentor {
+  id             String          @id @default(uuid())
+  name           String
+  mentees        Mentee[]
+  meetings       Meeting[]
+  announcements  Announcement[]
+}
+
+model Mentee {
+  id             String       @id @default(uuid())
+  name           String
+  mentor         Mentor       @relation(fields: [mentorId], references: [id])
+  mentorId       String
+  meetings       Meeting[]
+  announcements  Announcement[]
+  performance    Performance?
+}
+
+model Meeting {
+  id        String     @id @default(uuid())
+  mentor    Mentor     @relation(fields: [mentorId], references: [id])
+  mentorId  String
+  mentee    Mentee     @relation(fields: [menteeId], references: [id])
+  menteeId  String
+  startTime DateTime
+  endTime   DateTime
+}
+
+model Announcement {
+  id        String    @id @default(uuid())
+  mentor    Mentor    @relation(fields: [mentorId], references: [id])
+  mentorId  String
+  mentees   Mentee[]
+}
+
+model Performance {
+  id            String     @id @default(uuid())
+  CGPA          Float[]
+  otherDetails  String[]
+  mentee        Mentee     @relation(fields: [menteeId], references: [id])
+  menteeId      String     @unique
+}

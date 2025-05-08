@@ -1,0 +1,69 @@
+# Node modules
+node_modules/
+
+# Yarn
+.pnp
+.pnp.js
+yarn-debug.log*
+yarn-error.log*
+.yarn/install-state.gz
+
+# npm
+npm-debug.log*
+
+# Environment files
+.env*
+
+# Build output
+/build
+/dist
+/out
+/.next
+
+# Coverage
+/coverage
+
+# OS files
+.DS_Store
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
+
+# Prisma
+packages/db/generated/
+
+# Misc
+*.pem
+
+# Ignore lock files at root (optional, uncomment if needed)
+# package-lock.json
+# yarn.lock
+
+# Ignore Turbo/monorepo cache
+.turbo/
+
+# Ignore IDE/editor folders
+.vscode/
+.idea/
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore by package
+apps/web/node_modules/
+apps/web/.next/
+apps/web/out/
+apps/web/build/
+apps/web/.vercel/
+apps/web/coverage/
+
+packages/db/node_modules/
+packages/db/.env
+
+# Ignore generated Prisma files
+packages/db/generated/prisma/
