@@ -1,19 +1,19 @@
 import express from "express";
-import { authMiddleware } from "./middleware";
+import authMiddleware from "./middleware";
 import { prismaClient } from "../../packages/db/src";
 
 const app = express();
 app.use(express.json());
 
 // Mentor creates a meeting with a mentee
-app.post("/api/v1/mentor/createMeeting", authMiddleware, (req, res) => {
+app.post("/api/v1/mentor/createMeeting", (req, res) => {
     void (async () => {
         try {
             const { menteeId, startTime, endTime } = req.body;
             const meeting = await prismaClient.meeting.create({
                 data: {
                     mentorId: (req as any).userId,
-                    menteeId,
+                    menteeId,   
                     startTime: new Date(startTime),
                     endTime: new Date(endTime),
                 },
@@ -26,7 +26,7 @@ app.post("/api/v1/mentor/createMeeting", authMiddleware, (req, res) => {
 });
 
 // Mentor creates an announcement for mentees
-app.post("/api/v1/mentor/createAnnouncement", authMiddleware, (req, res) => {
+app.post("/api/v1/mentor/createAnnouncement", (req, res) => {
     void (async () => {
         try {
             const { menteeIds } = req.body; // array of mentee IDs
