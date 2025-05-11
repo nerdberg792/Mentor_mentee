@@ -23,7 +23,7 @@ export default function Appbar() {
   }, [isMentee])
   
   const {isSignedIn} = useUser()
-  console.log(isSignedIn)
+  console.log("L 26" , isSignedIn)
   
   return (
     <header className="w-full border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/60">

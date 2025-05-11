@@ -17,6 +17,7 @@ datasource db {
 model Mentor {
   id             String          @id @default(uuid())
   name           String
+  email          String          @unique
   mentees        Mentee[]
   meetings       Meeting[]
   announcements  Announcement[]
@@ -24,7 +25,8 @@ model Mentor {
 
 model Mentee {
   id             String       @id @default(uuid())
-  name           String
+  name           String      
+  email          String       @unique
   mentor         Mentor       @relation(fields: [mentorId], references: [id])
   mentorId       String
   meetings       Meeting[]
